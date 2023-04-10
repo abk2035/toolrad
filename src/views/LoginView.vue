@@ -3,6 +3,12 @@
  <v-card>
         <v-card width="700" height="50" style="background-color:#151414;" class="rounded-0"></v-card>
         <v-card width="700" class="mx-auto pa-10 rounded-0">
+          <div class="d-flex flex-row justify-center align-center mb-2">
+             <img src="/logo_toolrad.png" height="60" width="60" alt="logo"> 
+            <span class="ml-3 font-weight-bold text-h5">
+              Tool Rad <sup>3</sup>
+            </span>
+          </div>
           <v-form fast-fail @submit.prevent>
               <v-text-field 
               color="#C84356"
