@@ -29,11 +29,11 @@
   <v-container class="mt-5">
      
     <h class="text-caption ">Project Name :</h>
-     <v-col >
+     <v-col>
        <v-row v-for="(project, i) in projects"  :key="i" >
         <v-list-item 
                 :title="project.name"
-                link 
+                :to="`/projects/${project.id}`"
                 class="w-100 my-2"
               >
               <template #prepend>
@@ -51,7 +51,6 @@
 
 <script>
 import { defineComponent } from 'vue';
-
 // Components
 
 export default defineComponent({
@@ -63,18 +62,24 @@ export default defineComponent({
 
   setup(){
     const projects = [
-      {id:1,name:'toolrad'}, 
-      {id:1,name:'toolrad'},
-      {id:1,name:'toolrad'},
-      {id:1,name:'toolrad'},
-      {id:1,name:'toolrad'},
-      {id:1,name:'toolrad'},
-      {id:1,name:'toolrad'},
-      {id:1,name:'toolrad'}
+      {id:1,name:'toolrad1'}, 
+      {id:2,name:'toolrad2'},
+      {id:3,name:'toolrad3'},
+      {id:4,name:'toolrad4'},
+      {id:5,name:'toolrad5'},
+      {id:1,name:'toolrad6'},
+      {id:1,name:'toolrad7'},
+      {id:1,name:'toolrad8'}
     ]
 
-    return {projects
+    function openProject(index){
+        this.emitter.emit('projectOpened',projects[index]);
     }
+
+    return { 
+            projects,
+            openProject 
+           }
   }
 });
 </script>

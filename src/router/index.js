@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ProjectsView from '../views/ProjectsView.vue'
-import ProjectView from '../views/ProjectView.vue'
+import ProjectsView from '../views/Projects/ProjectsView.vue'
 import CollaboratorView from '../views/CollaboratorView.vue'
+import _idVue from '@/views/Projects/_id.vue'
+import LoginViewVue from '@/views/LoginView.vue'
 
 const routes = [
   {
@@ -10,15 +11,25 @@ const routes = [
     component:ProjectsView,
   },
   {
-    path: '/project',
+    path : '/projects/:id',
     name: 'project',
-    component:ProjectView
+    component:_idVue,
+    meta:{ sidebar:false }
   },
   {
     path: '/collaborator',
     name: 'collaborator',
     component:CollaboratorView
-  }
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component:LoginViewVue,
+    meta:{
+      hideNavbar: true,
+     }
+  },
+
 ]
 
 const router = createRouter({

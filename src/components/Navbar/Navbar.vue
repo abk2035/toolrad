@@ -1,7 +1,7 @@
 <template>
  <nav>
     <v-app-bar flat app color="#121212" height="60">
-        <v-app-bar-nav-icon  @click= "drawer = !drawer" color="grey"   v-if="mdAndDown"></v-app-bar-nav-icon >
+        <v-app-bar-nav-icon  @click= "drawer = !drawer" color="grey"   v-if="mdAndDown&&($route.name !== 'project')"></v-app-bar-nav-icon >
         <div class="d-flex flex-row  align-center mx-4">
              <img src="/logo_toolrad.png" height="40" width="40" alt="logo"> 
             <span class="ml-3 font-weight-bold text-h6 text-white">
@@ -20,11 +20,12 @@
          <UserNotifcation/>
          <UserMessage/>
          <Userprofile/>
-
-    
     </v-app-bar>
-    <v-navigation-drawer app v-model="drawer" 
-     class="bg-background h-screen borderme"     
+    <v-navigation-drawer app 
+    v-model="drawer" 
+     class="bg-background h-screen borderme"   
+     rounded="0"  
+     v-if="$route.name !=='project' "
      >      
         <v-list>
             <v-list-item  color="red"
@@ -41,7 +42,7 @@
 
 </template>
 <script>
-import { ref  } from 'vue';
+import { ref ,} from 'vue';
 import { useDisplay } from 'vuetify';
 import Userprofile from './UserProfil.vue'
 import UserMessage from './UserMessage.vue';
@@ -55,20 +56,22 @@ export default{
         UserNotifcation
     },
     setup(){
+      
 
         const {lgAndUp, mdAndDown} = useDisplay();
 
         const drawer = ref(lgAndUp.value);
 
-        const links = ref([
+        const links = [
         { icon: 'mdi-clock-time-three', text: 'recents project', route: '/' },
         { icon: 'mdi-account-multiple', text: 'Team', route: '/collaborator' },
-      ]);
+      ];
+          
+     
 
-      return { links, lgAndUp,mdAndDown,drawer }
-        
+      return { links, lgAndUp,mdAndDown,drawer ,}
+   
     },
-
 
 }
 </script>
@@ -99,5 +102,4 @@ export default{
     padding: 0;
     color: white;
 }
-
 </style>

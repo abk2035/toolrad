@@ -62,7 +62,7 @@ const links = [
               />
             </template>
 
-            <VListItemTitle>Logout</VListItemTitle>
+            <v-list-item-title>Logout</v-list-item-title>
       </v-list-item>
 
       </v-list>
