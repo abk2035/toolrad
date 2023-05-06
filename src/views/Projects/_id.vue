@@ -111,7 +111,7 @@ import { useRoute } from 'vue-router';
 
   export default{
     name :'project-view',
-    props :['project'],
+    props :['id'],
     components:{
        EntityCard
     },
@@ -156,12 +156,9 @@ import { useRoute } from 'vue-router';
       }
 
       // init project
-      onMounted(() => {
+      onMounted( function () {
 
-       this.emitter.on('projectOpened',(project)=>{
-          currentProject = project ;
-
-        });
+     
         console.log(currentProject);
       });
 

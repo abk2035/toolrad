@@ -50,7 +50,9 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue';
+import { defineComponent,
+  onMounted,computed } from 'vue';
+import { useStore } from 'vuex';
 // Components
 
 export default defineComponent({
@@ -61,22 +63,23 @@ export default defineComponent({
   },
 
   setup(){
-    const projects = [
-      {id:1,name:'toolrad1'}, 
-      {id:2,name:'toolrad2'},
-      {id:3,name:'toolrad3'},
-      {id:4,name:'toolrad4'},
-      {id:5,name:'toolrad5'},
-      {id:1,name:'toolrad6'},
-      {id:1,name:'toolrad7'},
-      {id:1,name:'toolrad8'}
-    ]
+    const store = useStore() ;
 
-    function openProject(index){
-        this.emitter.emit('projectOpened',projects[index]);
+    const projects = computed(()=>{
+      return this.store.state.projects ;
+    })
+     
+    
+    onMounted(()=>{
+       
+    })
+
+    function openProject(){
+        // this.$store.('projectOpened',projects[index]);
     }
 
     return { 
+            store,
             projects,
             openProject 
            }
