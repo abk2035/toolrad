@@ -6,18 +6,10 @@
         </v-divider>
       </v-row>
       <v-row justify="space-around" class="py-5">
+         <NewProjectDialog />
           <v-list-item 
-          active-color="primary"
-            link
-            prepend-icon="mdi-file"
-            title="Create New Project"
-            append-icon="mdi-plus"
-            class="borderme"
-          >
-          </v-list-item>
-          <v-list-item 
-          link
-         active-color ="primary"
+             link
+            active-color ="primary"
             title="Import File"
             prepend-icon="mdi-file-undo"
             class="borderme"
@@ -29,29 +21,41 @@
   <v-container class="mt-5">
      
     <h class="text-caption ">Project Name :</h>
-     <v-col>
+     <v-col >
        <v-row v-for="(project, i) in projects"  :key="i" >
-        <v-list-item 
-                :title="project.name"
-                :to="`/projects/${project.id}`"
-                class="w-100 my-2"
-              >
-              <template #prepend>
-                <v-icon color="">mdi-file</v-icon>
-              </template>
-              <template #append>
-                <v-icon color="error">mdi-delete</v-icon>
-              </template>
-        </v-list-item>
+        <v-col  class="d-flex  pa-0 align-center ">
+          <v-list-item
+                  :title="project.name"
+                  :to="`/projects/${project.id}`"
+                  class="w-75 my-2"
+                >
+                <template #prepend>
+                  <v-icon color="">mdi-file</v-icon>
+                </template>
+          </v-list-item>   
+          <v-spacer></v-spacer>
+          <v-btn icon="mdi-delete" 
+          width="30"
+           height="30" 
+           color="error"
+           @click="deleteProject(project)"></v-btn>
+        </v-col>
         <v-divider></v-divider>
       </v-row>
      </v-col>
   </v-container>
+  <DeleteProjectDialog 
+  :show="showConfirm" 
+  :project="selectedProject"
+   @cancel="noConfirmDelete" 
+   />
 </template>
 
 <script>
+import NewProjectDialog from '@/components/NewProjectDialog';
+import DeleteProjectDialog from '@/components/DeleteProjectDialog';
 import { defineComponent,
-  onMounted,computed } from 'vue';
+  onMounted,computed , ref } from 'vue';
 import { useStore } from 'vuex';
 // Components
 
@@ -59,29 +63,43 @@ export default defineComponent({
   name: 'projects-view',
 
   components: {
-    
+    NewProjectDialog,
+    DeleteProjectDialog
   },
 
   setup(){
     const store = useStore() ;
-
-    const projects = computed(()=>{
-      return this.store.state.projects ;
-    })
+    const projects = computed(()=> store.getters.getProjects );
+    const showConfirm = ref(false);
+    const selectedProject = ref(null);
      
     
     onMounted(()=>{
-       
+      //  console.log(store.projects);
     })
 
     function openProject(){
         // this.$store.('projectOpened',projects[index]);
     }
 
+    // delete project
+    function deleteProject(project){
+       showConfirm.value = true ;
+       selectedProject.value = project ;
+      console.log(showConfirm.value);
+    }
+
+    function noConfirmDelete(){
+      showConfirm.value = false ;
+    }
+
     return { 
-            store,
             projects,
-            openProject 
+            showConfirm,
+            selectedProject,
+            openProject,
+            deleteProject,
+            noConfirmDelete,
            }
   }
 });

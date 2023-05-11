@@ -158,7 +158,6 @@ import { useRoute } from 'vue-router';
       // init project
       onMounted( function () {
 
-     
         console.log(currentProject);
       });
 

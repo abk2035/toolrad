@@ -7,8 +7,8 @@ import { loadFonts } from './plugins/webfontloader'
 
 loadFonts()
 
- const app = createApp(App);
- app.use(router)
+ createApp(App)
+  .use(router)
   .use(store)
   .use(vuetify)
   .mount('#app')
