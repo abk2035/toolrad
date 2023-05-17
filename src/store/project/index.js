@@ -15,7 +15,11 @@ export default {
     },
     getters: {
         getProjects(state){ return state.projects.reverse() },
-        getProjectById(state,payload){return state.projects.find((project)=> project===payload )}
+        getProjectById(state){
+            return (payload)=>{
+              return state.projects.find((project)=> project.id===payload)
+            }
+         }
 
     },
     mutations: {

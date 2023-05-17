@@ -147,8 +147,7 @@ import { useRoute } from 'vue-router';
 
       ]
       //edit Project 
-      let currentProject = ref({
-      })
+      let currentProject = ref({})
 
       const setEditProjectName = ref(true);
       function editProjectName(){
@@ -158,7 +157,7 @@ import { useRoute } from 'vue-router';
       // init project
       onMounted( function () {
 
-        console.log(currentProject);
+        //console.log(currentProject);
       });
 
       return { 
